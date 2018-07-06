@@ -4,4 +4,7 @@
 for BUILD_VERSION in 1.8 1.9 1.10 1.11 1.12
 do
   docker build --build-arg "dcos_cli_release=dcos-${BUILD_VERSION}" -t "${DOCKER_REPO}:${BUILD_VERSION}" .
+
+  # Re-tag to latest until there are no more versions left
+  docker tag "${DOCKER_REPO}:${BUILD_VERSION}" "${DOCKER_REPO}:latest"
 done
