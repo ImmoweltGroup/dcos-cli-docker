@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# This is file is ran by Docker Hub
+
+for BUILD_VERSION in 1.8 1.9 1.10 1.11 1.12
+do
+  docker build --build-arg "dcos_cli_release=dcos-${BUILD_VERSION}" -t "${DOCKER_REPO}:${BUILD_VERSION}" .
+done
