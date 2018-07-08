@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# This is file is ran by Docker Hub
+# This file is ran by Docker Hub and Docker Cloud's build infrastrcture
 
 for BUILD_VERSION in 1.8 1.9 1.10 1.11 1.12
 do
