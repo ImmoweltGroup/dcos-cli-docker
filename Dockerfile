@@ -2,9 +2,9 @@ FROM centos
 LABEL maintainer="Leroy Foerster <Leroy.Foerster@immonet.de>"
 
 # Add entrypoint middleware to handle setting DC/OS server URL
-ADD entrypoint.sh entrypoint.sh
-RUN chmod +x entrypoint.sh
-ENTRYPOINT [ "./entrypoint.sh" ]
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
 
 # Install dependencies
 RUN yum install -y wget && yum clean all
