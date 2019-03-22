@@ -1,9 +1,20 @@
 #!/usr/bin/env sh
 # This file is ran by Docker Hub and Docker Cloud's build infrastrcture
 
-for BUILD_VERSION in 1.8 1.9 1.10 1.11 1.12 1.13
+API_VERSION="api-1.8"
+for BUILD_VERSION in 1.8 1.9
 do
-  docker build --build-arg "dcos_cli_release=dcos-${BUILD_VERSION}" -t "${DOCKER_REPO}:${BUILD_VERSION}" .
+  docker build --build-arg "API_VERSION"="${API_VERSION}" --build-arg "dcos_cli_release=dcos-${BUILD_VERSION}" -t "${DOCKER_REPO}:${BUILD_VERSION}" .
+  docker push "${DOCKER_REPO}:${BUILD_VERSION}"
+
+  # Re-tag to latest until there are no more versions left
+  docker tag "${DOCKER_REPO}:${BUILD_VERSION}" "${DOCKER_REPO}:latest"
+done
+
+API_VERSION="api-1.10"
+for BUILD_VERSION in 1.10 1.11 1.12 1.13
+do
+  docker build --build-arg "API_VERSION"="${API_VERSION}" --build-arg "dcos_cli_release=dcos-${BUILD_VERSION}" -t "${DOCKER_REPO}:${BUILD_VERSION}" .
   docker push "${DOCKER_REPO}:${BUILD_VERSION}"
 
   # Re-tag to latest until there are no more versions left
